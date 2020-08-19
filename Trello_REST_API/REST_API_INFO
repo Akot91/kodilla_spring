@@ -1,0 +1,21 @@
+TRELLO
+
+curl 'https://api.trello.com/1/members/me/boards?key={yourKey}&token={yourToken}'
+
+
+https://api.trello.com/1/boards/{id}?key={key}&token={token}
+
+key
+e12fc65597b500e73b7eb2be14dda9af
+
+token
+4d142b047cfe2dd2b84f056776da1cae6fc33662d698cfea99df3d8b78ca1f26
+
+board short id
+O6aVzCL7
+
+long board id
+5f350903fa6b055915af7b8c
+
+
+https://api.trello.com/1/boards/5f350903fa6b055915af7b8c?key=e12fc65597b500e73b7eb2be14dda9af&token=4d142b047cfe2dd2b84f056776da1cae6fc33662d698cfea99df3d8b78ca1f26
