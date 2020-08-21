@@ -1,0 +1,14 @@
+body {
+	background-color: #FFFF00;
+}
+
+h1 {
+	text-align: center;
+	color: red;
+	font-size: 32px;
+}
+
+p{
+	font-size: 16px;
+	font-family: 'Calibri';
+}
