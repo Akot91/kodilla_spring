@@ -5,6 +5,7 @@ import com.crud.tasks.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +25,10 @@ public class DbService {
 
     public Task saveTask(final Task task) {
         return repository.save(task);
+    }
+
+    public void deleteTask(final Long id) {
+        repository.deleteById(id);
     }
 
 }

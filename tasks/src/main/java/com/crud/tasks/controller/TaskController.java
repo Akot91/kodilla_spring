@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/v1/task")
 public class TaskController {
@@ -30,8 +30,9 @@ public class TaskController {
         return taskMapper.mapToTaskDto(service.getTask(taskId).orElseThrow(TaskNotFoundException::new));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "deleteTask")
-    public void deleteTask(Long taskId) {
+    @DeleteMapping("/{taskId}")
+    public void deleteTask(@PathVariable long taskId) {
+        service.deleteTask(taskId);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateTask")
