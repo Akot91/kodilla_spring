@@ -1,4 +1,4 @@
-call tasks/runcrud.bat
+call tasks\runcrud.bat
 if "%ERRORLEVEL%" == "0" goto runbrowser
 echo.
 echo GRADLEW BUILD has errors - breaking work
