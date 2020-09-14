@@ -8,10 +8,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public class TrelloClient {
@@ -32,19 +29,7 @@ public class TrelloClient {
     private RestTemplate restTemplate;
 
     public List<TrelloBoardDto> getTrelloBoards() {
-        //TrelloBoardDto[] boardsResponse = restTemplate.getForObject(getUrl(), TrelloBoardDto[].class);
-
-        Optional<TrelloBoardDto[]> optional = Optional.of(restTemplate.getForObject(getUrl(), TrelloBoardDto[].class));
-
-        if(optional.isPresent()) {
-            return Arrays.asList(optional.get());
-        }
-
-        /*if(boardsResponse != null) {
-            return Arrays.asList(boardsResponse);
-        }*/
-
-        return new ArrayList<>();
+        return Arrays.asList(Optional.ofNullable(restTemplate.getForObject(getUrl(), TrelloBoardDto[].class)).orElseGet(() -> new TrelloBoardDto[0]));
     }
 
     private URI getUrl() {
