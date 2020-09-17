@@ -6,14 +6,12 @@ import com.crud.tasks.domain.TrelloCardDto;
 import com.crud.tasks.trello.client.TrelloClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/v1/trello")
 public class TrelloController {
 
@@ -21,10 +19,13 @@ public class TrelloController {
     private TrelloClient trelloClient;
 
     @RequestMapping(method = RequestMethod.GET, value = "getTrelloBoards")
-    public void getTrelloBoards() {
+    public List<TrelloBoardDto> getTrelloBoards() {
 
-        List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
+        //List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
 
+        return trelloClient.getTrelloBoards();
+
+        /*
         trelloBoards
                 .stream()
                 .filter(trelloBoardDto -> !StringUtils.isEmpty(trelloBoardDto.getId()) && !StringUtils.isEmpty(trelloBoardDto.getName()) && trelloBoardDto.getName().contains("Kodilla"))
@@ -41,6 +42,7 @@ public class TrelloController {
                     System.out.println(trelloList.getName() + " - " + trelloList.getId() + " - " + trelloList.isClosed()));
 
         });
+        */
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createTrelloCard")
