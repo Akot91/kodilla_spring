@@ -10,4 +10,5 @@ public class Mail {
     private String receiveEmial;
     private String subject;
     private String message;
+    private String toCC;
 }
