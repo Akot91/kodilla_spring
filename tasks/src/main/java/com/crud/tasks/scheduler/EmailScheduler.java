@@ -33,10 +33,6 @@ public class EmailScheduler {
     }
 
     private String createPluralWord(String text, long size) {
-        if (size == 1) {
-            return text;
-        } else {
-            return text + "s";
-        }
+        return size == 1 ? text : text + "s";
     }
 }
