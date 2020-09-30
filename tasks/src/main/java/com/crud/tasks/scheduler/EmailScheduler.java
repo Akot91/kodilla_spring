@@ -28,7 +28,8 @@ public class EmailScheduler {
         simpleEmailService.send(new Mail(
                 adminConfig.getAdminMail(),
                 SUBJECT,
-                "Currently in database you have got: " + size + " " + createPluralWord("task", size)
+                "Currently in database you have got: " + size + " " + createPluralWord("task", size),
+                "szundipundi@gmail.com"
         ));
     }
 
