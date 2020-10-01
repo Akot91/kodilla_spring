@@ -31,6 +31,12 @@ public class TrelloMapperTestSuite {
         Assert.assertEquals(result.getIdList(), "1");
     }
 
+    @Test(expected = NullPointerException.class)
+    public void mapToCardDtoshouldReturnNullPointerException(){
+        //Given When Then
+        TrelloCardDto result = trelloMapper.mapToCardDto(null);
+    }
+
     @Test
     public void shouldReturnTrelloCard() {
         //Given
@@ -44,6 +50,12 @@ public class TrelloMapperTestSuite {
         Assert.assertEquals(result.getDescription(), "TestDesc");
         Assert.assertEquals(result.getPos(), "top");
         Assert.assertEquals(result.getListId(), "1");
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void mapToCardshouldReturnNullPointerException(){
+        //Given When Then
+        TrelloCard result = trelloMapper.mapToCard(null);
     }
 
     @Test
@@ -61,6 +73,24 @@ public class TrelloMapperTestSuite {
     }
 
     @Test
+    public void shouldReturnEmptyTrelloListDtoList() {
+        //Given
+        List<TrelloListDto> testee = new ArrayList<>();
+
+        //When
+        List<TrelloList> result = trelloMapper.mapToList(testee);
+
+        //Then
+        Assert.assertEquals(0, result.size());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void mapToTrelloListShouldReturnNullPointerException(){
+        //Given When Then
+        List<TrelloList> result = trelloMapper.mapToList(null);
+    }
+
+    @Test
     public void shouldReturnTrelloListDto() {
         //Given
         List<TrelloList> testee = new ArrayList<>();
@@ -72,6 +102,24 @@ public class TrelloMapperTestSuite {
 
         //Then
         Assert.assertEquals(2, result.size());
+    }
+
+    @Test
+    public void shouldReturnEmptyTrelloDtoListList() {
+        //Given
+        List<TrelloList> testee = new ArrayList<>();
+
+        //When
+        List<TrelloListDto> result = trelloMapper.mapToDtoList(testee);
+
+        //Then
+        Assert.assertEquals(0, result.size());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void mapToTrelloDtoListShouldReturnNullPointerException(){
+        //Given When Then
+        List<TrelloListDto> result = trelloMapper.mapToDtoList(null);
     }
 
     @Test
@@ -91,6 +139,24 @@ public class TrelloMapperTestSuite {
     }
 
     @Test
+    public void shouldReturnEmptyBoardsDtoList() {
+        //Given
+        List<TrelloBoard> testee = new ArrayList<>();
+
+        //When
+        List<TrelloBoardDto> result = trelloMapper.mapToBoardsDto(testee);
+
+        //Then
+        Assert.assertEquals(0, result.size());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void mapToBoardsDtoListShouldReturnNullPointerException(){
+        //Given When Then
+        List<TrelloBoardDto> result = trelloMapper.mapToBoardsDto(null);
+    }
+
+    @Test
     public void shouldReturnBoards() {
         //Given
         List<TrelloListDto> trelloListDtos = new ArrayList<>();
@@ -104,6 +170,24 @@ public class TrelloMapperTestSuite {
 
         //Then
         Assert.assertEquals(2, result.size());
+    }
+
+    @Test
+    public void shouldReturnEmptyBoardsList() {
+        //Given
+        List<TrelloBoardDto> testee = new ArrayList<>();
+
+        //When
+        List<TrelloBoard> result = trelloMapper.mapToBoards(testee);
+
+        //Then
+        Assert.assertEquals(0, result.size());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void mapToBoardsListShouldReturnNullPointerException(){
+        //Given When Then
+        List<TrelloBoard> result = trelloMapper.mapToBoards(null);
     }
 
 }
