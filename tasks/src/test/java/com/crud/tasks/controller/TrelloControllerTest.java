@@ -80,7 +80,7 @@ public class TrelloControllerTest {
         Badges badges = new Badges();
         CreatedTrelloCardDto createdTrelloCardDto = new CreatedTrelloCardDto("323", "test", "http://url.pl", badges);
 
-        when(trelloFacade.createCard(ArgumentMatchers.any(TrelloCardDto.class))).thenReturn(createdTrelloCardDto);
+        when(trelloFacade.createCard(ArgumentMatchers.any())).thenReturn(createdTrelloCardDto);
 
         Gson gson = new Gson();
         String jsonContent = gson.toJson(trelloCardDto);
