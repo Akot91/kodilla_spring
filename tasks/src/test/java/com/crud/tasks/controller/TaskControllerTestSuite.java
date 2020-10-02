@@ -83,7 +83,7 @@ public class TaskControllerTestSuite {
         TaskDto taskDto = new TaskDto(1L, "title", "content");
         Task task = new Task(1L, "title", "content");
 
-        when(dbService.saveTask(ArgumentMatchers.any(Task.class))).thenReturn(taskMapper.mapToTask(taskDto));
+        when(dbService.saveTask(ArgumentMatchers.any())).thenReturn(taskMapper.mapToTask(taskDto));
 
         Gson gson = new Gson();
         String jsonContent = gson.toJson(task);
