@@ -11,20 +11,20 @@ import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.core.NestedCheckedException;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(TaskController.class)
@@ -78,6 +78,17 @@ public class TaskControllerTestSuite {
     }
 
     @Test
+    public void shouldGetTaskThrowException() throws Exception {
+        //Given
+        doThrow(new EntityNotFoundException("Task 100 not found!")).when(dbService).getTask(100L);
+
+        //When Then
+        mockMvc.perform(get("/v1/task/getTask?taskId=100").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(500))
+                .andExpect(content().string("Task 100 not found!"));
+    }
+
+    @Test
     public void shouldCreateTask() throws Exception {
         //Given
         TaskDto taskDto = new TaskDto(1L, "title", "content");
@@ -95,5 +106,31 @@ public class TaskControllerTestSuite {
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.title", is("title")))
                 .andExpect(jsonPath("$.content", is("content")));
+    }
+
+    @Test
+    public void shouldDeleteTask() throws Exception {
+        //Given When Then
+        mockMvc.perform(delete("/v1/task/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .param("taskId", "1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").doesNotExist());
+
+        verify(dbService, times(1)).deleteTask(1L);
+    }
+
+    @Test
+    public void shouldDeleteTaskThrowException() throws Exception {
+        // Given
+        doThrow(new EntityNotFoundException("Task 100 not found!")).when(dbService).deleteTask(100L);
+
+        // When & Then
+        mockMvc.perform(delete("/v1/task/100")
+                .contentType(MediaType.APPLICATION_JSON)
+                .param("taskId", "100"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("Task 100 not found!"));
     }
 }
