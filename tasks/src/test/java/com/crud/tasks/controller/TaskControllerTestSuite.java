@@ -1,5 +1,6 @@
 package com.crud.tasks.controller;
 
+import com.crud.tasks.EntityException;
 import com.crud.tasks.domain.Task;
 import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
@@ -8,6 +9,7 @@ import com.google.gson.Gson;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -20,6 +22,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
@@ -80,12 +83,13 @@ public class TaskControllerTestSuite {
     @Test
     public void shouldGetTaskThrowException() throws Exception {
         //Given
-        doThrow(new EntityNotFoundException("Task 100 not found!")).when(dbService).getTask(100L);
+        doThrow(new TaskNotFoundException()).when(dbService).getTask(100L);
 
         //When Then
-        mockMvc.perform(get("/v1/task/getTask?taskId=100").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is(500))
-                .andExpect(content().string("Task 100 not found!"));
+        assertThatThrownBy(() ->
+            mockMvc.perform(get("/v1/task/getTask?taskId=100").contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(status().is(500))
+                    .andExpect(content().string("Task 100 not found!")));
     }
 
     @Test
