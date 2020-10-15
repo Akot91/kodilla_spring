@@ -16,7 +16,7 @@ import static org.apache.logging.log4j.util.Strings.isNotEmpty;
 @Service
 public class SimpleEmailService {
 
-    @Autowired
+    /*@Autowired
     private JavaMailSender javaMailSender;
 
     @Autowired
@@ -54,5 +54,5 @@ public class SimpleEmailService {
         simpleMessage.setSubject(mail.getSubject());
         simpleMessage.setText(mail.getMessage());
         return simpleMessage;
-    }
+    }*/
 }
