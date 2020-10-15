@@ -3,9 +3,9 @@ package tasks.controller;
 import tasks.domain.CreatedTrelloCardDto;
 import tasks.domain.TrelloBoardDto;
 import tasks.domain.TrelloCardDto;
-import tasks.trello.facade.TrelloFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tasks.trello.facade.TrelloFacade;
 
 import java.util.List;
 
