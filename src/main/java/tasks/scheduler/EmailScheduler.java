@@ -25,12 +25,12 @@ public class EmailScheduler {
     @Scheduled(cron = "0 0 10 * * *")
     public void sendInformationEmail() {
         long size = taskRepository.count();
-        simpleEmailService.send(new Mail(
+       /* simpleEmailService.send(new Mail(
                 adminConfig.getAdminMail(),
                 SUBJECT,
                 "Currently in database you have got: " + size + " " + createPluralWord("task", size),
                 "szundipundi@gmail.com"
-        ));
+        ));*/
     }
 
     private String createPluralWord(String text, long size) {
