@@ -1,6 +1,6 @@
 package tasks.repository;
 
-import com.crud.tasks.domain.Task;
+import tasks.domain.Task;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

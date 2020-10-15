@@ -1,6 +1,7 @@
 package tasks.mapper;
 
 import org.springframework.stereotype.Component;
+import tasks.domain.*;
 
 import java.util.List;
 

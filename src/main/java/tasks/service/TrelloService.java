@@ -1,11 +1,11 @@
 package tasks.service;
 
-import com.crud.tasks.config.AdminConfig;
-import com.crud.tasks.domain.CreatedTrelloCardDto;
-import com.crud.tasks.domain.Mail;
-import com.crud.tasks.domain.TrelloBoardDto;
-import com.crud.tasks.domain.TrelloCardDto;
-import com.crud.tasks.trello.client.TrelloClient;
+import tasks.config.AdminConfig;
+import tasks.domain.CreatedTrelloCardDto;
+import tasks.domain.Mail;
+import tasks.domain.TrelloBoardDto;
+import tasks.domain.TrelloCardDto;
+import tasks.trello.client.TrelloClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

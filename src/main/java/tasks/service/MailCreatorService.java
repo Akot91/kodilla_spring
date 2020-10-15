@@ -1,6 +1,6 @@
 package tasks.service;
 
-import com.crud.tasks.config.AdminConfig;
+import tasks.config.AdminConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class MailCreatorService {
 
     @Autowired
     @Qualifier("templateEngine")
-    private TemplateEngine templateEngine;
+    private org.thymeleaf.ITemplateEngine templateEngine;
 
     public String buildTrelloCardEmail(String message) {
         List<String> functionality = new ArrayList<>();
